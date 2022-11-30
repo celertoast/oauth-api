@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMDBContext\SMDBContext.csproj" />
+    <ProjectReference Include="..\SMEntities\SMEntities.csproj" />
+    <ProjectReference Include="..\SMModels\SMModels.csproj" />
+  </ItemGroup>
+
+</Project>

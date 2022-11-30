@@ -1,0 +1,12 @@
+﻿@model SMEntities.ISubject
+
+
+                <label asp-for="SubjectId" class="control-label"></label>
+
+              
+               <select asp-for="SubjectId" asp-items="ViewBag.SubjectList">
+
+               </select>
+                <span asp-validation-for="SubjectId" class="text-danger"></span>
+            
+ 

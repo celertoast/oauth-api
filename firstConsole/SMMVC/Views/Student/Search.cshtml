@@ -1,0 +1,93 @@
+﻿@model SMModels.StudentSearch
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="~/student/List" id="frmId" name="frmId" method="post"  onsubmit="submitData()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="IdText" class="control-label"></label>
+                        <input asp-for="IdText" class="form-control" />
+                        <span asp-validation-for="IdText" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="FirstNameText" class="control-label"></label>
+                        <input asp-for="FirstNameText" class="form-control" />
+                        <span asp-validation-for="FirstNameText" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="LastNameText" class="control-label"></label>
+                        <input asp-for="LastNameText" class="form-control" />
+                        <span asp-validation-for="LastNameText" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="FeesText" class="control-label"></label>
+                        <input asp-for="FeesText" class="form-control" />
+                        <span asp-validation-for="FeesText" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="SubjectText" class="control-label"></label>
+                        <input asp-for="SubjectText" class="form-control" />
+                        <span asp-validation-for="SubjectText" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="DojText" class="control-label"></label>
+                        <input asp-for="DojText" class="form-control" />
+                        <span asp-validation-for="DojText" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+             
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="AgeGteText" class="control-label"></label>
+                        <input asp-for="AgeGteText" class="form-control" />
+                        <span asp-validation-for="AgeGteText" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="AgeLteText" class="control-label"></label>
+                        <input asp-for="AgeLteText" class="form-control" />
+                        <span asp-validation-for="AgeLteText" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                    
+                </div>
+                <div class="form-group">
+                    <input asp-for="Page.RowCount" type="hidden" class="form-control" />
+                    <input asp-for="Page.CurrentPage" type="hidden" class="form-control" />
+                    <input asp-for="OrderBy" type="hidden" class="form-control" />
+                    <input asp-for="ColumnName" type="hidden" class="form-control" />
+                    <input type="submit"  value="Search" id="btnSubmit" class="btn btn-primary" />
+                </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

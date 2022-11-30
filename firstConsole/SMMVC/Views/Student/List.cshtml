@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<SMEntities.Student>
+@using SMModels
+@{
+
+    StudentSearch studentSearch = ViewBag.studentSearch as StudentSearch;
+
+}
+
+<div class="card">
+    <div class="card-header">
+        Simple Datatable
+    </div>
+    <div class="card-body">
+
+        @Html.Partial("Search", studentSearch)
+    </div>
+    <button type="button">Export to Pdf</button>
+    <button type="button">Export to Excel</button>
+    <div class="card-body" id="tableId">
+
+      <a href="/student/add">Add</a>
+
+        @Html.Partial("Table", Model)
+
+    </div>
+</div>
+
+

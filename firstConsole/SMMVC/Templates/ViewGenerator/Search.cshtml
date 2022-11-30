@@ -1,0 +1,98 @@
+﻿@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+@using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore
+@using System.Collections.Generic
+@using System.Linq
+@@model @Model.ViewDataTypeName
+
+@{
+    if (Model.IsPartialView)
+    {
+    }
+    else if (Model.IsLayoutPageSelected)
+    {
+
+    }
+    else
+    {
+        @:@@{
+        @:Layout = null;
+        @:}
+        @:
+        @:<!DOCTYPE html>
+        @:
+        @:<html>
+        @:<head>
+            @:<meta name="viewport" content="width=device-width" />
+            @:<title>@Model.ViewName</title>
+        @:</head>
+        @:<body>
+            @:
+            //    PushIndent("    ");
+        }
+
+        @:<div class="row">
+            @:<div class="col-md-12">
+                @:<form asp-action="@Model.ViewName">
+                    @:<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    int i = 0;
+                    foreach (PropertyMetadata property in Model.ModelMetadata.Properties)
+                    {
+                        if (i % 2 == 0)
+                        {
+                            @:<div class="row">
+                            }
+
+                            @:<div class="col-6">
+                                @:<div class="form-group">
+                                    @: <label asp-for="@property.PropertyName" class="control-label"></label>
+                                    @: <input asp-for="@property.PropertyName" class="form-control" />
+                                    @:   <span asp-validation-for="@property.PropertyName" class="text-danger"></span>
+                                @: </div>
+                            @: </div>
+
+
+                            if (i % 2 == 1)
+                            {
+                            @:</div>
+                        }
+                        i = i + 1;
+                    }
+}
+<div class="form-group">
+    <input type="submit" value="Save" class="btn btn-primary" />
+</div>
+</form>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@{
+    if (Model.ReferenceScriptLibraries)
+    {
+        @:@@section Scripts {
+        @:@@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        @:}
+    }
+    // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+    if (!Model.IsPartialView && !Model.IsLayoutPageSelected)
+    {
+    @:</body>
+@:</html>
+}
+}
+@functions
+{
+    string GetAssociationName(IPropertyMetadata property)
+    {
+        //Todo: Implement properly.
+        return property.PropertyName;
+    }
+
+    string GetValueExpression(IPropertyMetadata property)
+    {
+        return property.PropertyName;
+    }
+}

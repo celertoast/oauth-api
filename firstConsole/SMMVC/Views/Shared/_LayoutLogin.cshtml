@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SMMVC</title>
+   
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/simple-datatables/style.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+</head>
+<body>
+
+
+    <div id="auth">
+
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+
+
+                    @RenderBody()
+                  
+                </div>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+   
+
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/jquery/ajax.jquery.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
+
+
+    <script src="/assets/js/main.js"></script>
+
+
+
+    @RenderSection("Scripts", required: false)
+
+
+    <script type="text/javascript">
+
+
+        function submitData() {
+            event.preventDefault();
+            var frm = document.querySelector("#frmId");
+            var url = frm.getAttribute("action");
+            if (url.indexOf("?") > -1) {
+                url = url + "&isAjax=1"
+            } else {
+                url = url + "?isAjax=1"
+            }
+            var formData = new FormData();
+            var elements = frm.querySelectorAll("[name]");
+            for (var i = 0; i < elements.length; i++) {
+                formData.append(elements[i].getAttribute("name"), elements[i].value)
+            }
+
+            var http = new XMLHttpRequest();
+            http.open("POST", url);
+            http.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        debugger;
+                        $("#tableId").html(this.responseText);
+                    } else {
+                        debugger;
+                    }
+                }
+            }
+            http.send(formData);
+            //$.ajax({
+            //    url: url,
+            //    type: 'post',
+            //    data: formData,
+            //    processData: false,
+            //    contentType: false,
+            //    success: function (result) {
+            //        $("#tableId").html(result);
+            //    },
+            //    error: function (err) {
+            //        debugger;
+            //    }
+            //})
+
+
+            return false;
+        }
+
+        function getRowCount(val) {
+            debugger;
+            event.preventDefault();
+            $("#Page_RowCount").val(val);
+
+            // $("#frmId").submit();
+            submitData();
+            return false;
+        }
+
+        function getPage(pageNum) {
+
+            event.preventDefault();
+
+
+            $("#Page_CurrentPage").val(pageNum);
+            // $("#frmId").submit();
+            submitData();
+            return false;
+        }
+
+
+        function getOrderBy(columnName, orderBy) {
+
+            event.preventDefault();
+            if (orderBy.toLowerCase() == 'desc') {
+                orderBy = 'asc';
+            } else {
+                orderBy = 'desc';
+            }
+
+            $("#OrderBy").val(orderBy);
+            $("#ColumnName").val(columnName);
+
+            //  $("#frmId").submit();
+            submitData();
+            return false;
+        }
+
+    </script>
+
+</body>
+</html>
